@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+const ModuleFederationPlugin =
+    require('webpack').container.ModuleFederationPlugin;
+const { FederatedTypesPlugin } = require('@module-federation/typescript');
 
 // plugins
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -99,5 +102,21 @@ module.exports = {
             template: path.join(__dirname, 'src', 'index.html'),
         }),
         new NodePolyfillPlugin(),
+        new FederatedTypesPlugin({
+            federationConfig: {
+                name: 'app1',
+                filename: 'app1.js',
+                exposes: {},
+                remotes: { app2: 'app2@http://localhost:3001/app2.js' },
+                shared: [],
+            },
+        }),
+        // new ModuleFederationPlugin({
+        //     name: 'app1',
+        //     filename: 'app1.js',
+        //     exposes: {},
+        //     remotes: { app2: 'app2@http://localhost:3001/app2.js' },
+        //     shared: [],
+        // }),
     ],
 };

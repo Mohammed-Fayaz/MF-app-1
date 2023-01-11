@@ -9,9 +9,10 @@
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
         "checkJs": true,
-        "baseUrl": "./src",
+        "baseUrl": ".",
         "paths": {
-            "shared": ["./shared"]
+            "shared": ["./src/shared"],
+            "@mf-types": ["./@mf-types/*"]
         },
         "esModuleInterop": true,
         "skipLibCheck": true,
